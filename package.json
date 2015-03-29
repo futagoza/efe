@@ -1,0 +1,29 @@
+{
+  "name": "efe",
+  "version": "0.0.0",
+  "author": {
+    "name": "Futago-za Ryuu",
+    "email": "futagoza.ryuu@gmail.com",
+    "url": "http://futagoza.github.io/"
+  },
+  "homepage": "https://github.com/futagoza/efe",
+  "license": "The MIT License",
+  "description": "Enhanced FS-Extra",
+  "keywords": [
+    "efe", "fs", "fs-extra", "chokidar", "glob", "path"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/futagoza/efe.git"
+  },
+  "bugs": {
+    "url": "https://github.com/futagoza/efe/issues"
+  },
+  
+  "main": "index.js",
+  "dependencies": {
+    "fs-extra": "0.17.0",
+    "chokidar": "1.0.0-rc4",
+    "glob": "5.0.3"
+  }
+}
