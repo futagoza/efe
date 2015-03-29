@@ -2,19 +2,23 @@
  * Required modules.
  */
 
-var FS = require('fs-extra');
+var NFS = require('fs');
+var FSE = require('fs-extra');
 var PATH = require('path');
 var chokidar = require('chokidar');
 var glob = require('glob');
 var Walker = require("walker");
 
 /**
- * `efe`'s' module.exports is a shallow clone of `fs-extra`
+ * `efe`'s' module.exports is a shallow clone of `fs` and `fs-extra`
  */
 
 var fs = exports = module.exports = {};
-Object.keys(FS).forEach(
-  function ( key ) { fs[key] = FS[key]; }
+Object.keys(NFS).forEach(
+  function ( key ) { fs[key] = NFS[key]; }
+);
+Object.keys(FSE).forEach(
+  function ( key ) { fs[key] = FSE[key]; }
 );
 
 /**
@@ -70,8 +74,8 @@ fs.format = PATH.format;
 fs.Watcher = chokidar.FSWatcher;
 fs.watch = chokidar.watch;
 fs.glob = glob;
-fs.writeFile = FS.outputFile;
-fs.writeFileSync = FS.outputFileSync;
+fs.writeFile = FSE.outputFile;
+fs.writeFileSync = FSE.outputFileSync;
 fs.Walker = Walker;
 
 /**
@@ -89,13 +93,13 @@ function modifyStatsObject ( stats, path ) {
 ["stat", "lstat"/*, "fstat"*/].forEach(function(method){
   
   fs[method] = function ( path, callback ) {
-    FS[method](path, function(err, stats){
+    FSE[method](path, function(err, stats){
       callback(err, stats ? modifyStatsObject(stats, path) : stats);
     });
   };
   
   fs[method + 'Sync'] = function ( path ) {
-    return modifyStatsObject(FS[method + 'Sync'](path), path);
+    return modifyStatsObject(FSE[method + 'Sync'](path), path);
   };
   
 });
