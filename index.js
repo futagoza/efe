@@ -22,35 +22,44 @@ Object.keys(FSE).forEach(
 );
 
 /**
- * This should ensure that only forward slashs are used, even on Windows.
+ * Expose version of `efe`.
+ */
+
+fs.VERSION = require('./package.json').version;
+
+/**
+ * Ensure's forward slashs are used on Windows.
  */
 
 var normalize = PATH.normalize;
 
-fs.enableForwardOnly = function ( ) {
+fs.enableForwardSlashes = function ( ) {
   fs.normalize = PATH.normalize = function ( ) {
     return normalize.apply(PATH, arguments).replace('\\', '/');
   };
   return fs;
 };
 
-fs.disableForwardOnly = function ( ) {
+fs.disableForwardSlashes = function ( ) {
   fs.normalize = PATH.normalize = normalize;
   return fs;
 };
 
 /**
- * Remove's `deprecated` warning when using `fs.existsSync`.
+ * Remove `deprecated` warning when using `fs.exists(Sync)`.
  */
 
 if ( fs.access && fs.accessSync ) {
   
   fs.exists = function ( path, callback ) {
-    return fs.access(path, fs.F_OK, callback);
+    return fs.access(path, fs.F_OK, function(err){
+      if ( err ) throw err;
+      callback(err ? null : true);
+    });
   };
   
   fs.existsSync = function ( path ) {
-    return fs.accessSync(path, fs.F_OK);
+    return fs.accessSync(path, fs.F_OK) ? false : true;
   };
   
 }
@@ -73,7 +82,10 @@ fs.parse = PATH.parse;
 fs.format = PATH.format;
 fs.Watcher = chokidar.FSWatcher;
 fs.watch = chokidar.watch;
+fs.hasMagic = glob.hasMagic;
 fs.glob = glob;
+fs.globSync = glob.sync;
+fs.Glob = glob.Glob;
 fs.writeFile = FSE.outputFile;
 fs.writeFileSync = FSE.outputFileSync;
 fs.Walker = Walker;
