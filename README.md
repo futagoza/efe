@@ -76,6 +76,7 @@ fs.sizeSync(path, [options])
   * chokidar: [https://github.com/paulmillr/chokidar](https://github.com/paulmillr/chokidar)
   * glob: [https://github.com/isaacs/node-glob](https://github.com/isaacs/node-glob)
   * walker: [https://github.com/daaku/nodejs-walker](https://github.com/daaku/nodejs-walker)
+  * filesize: [https://github.com/avoidwork/filesize.js](https://github.com/avoidwork/filesize.js)
 
 # license
 Copyright (c) 2015 [Futago-za Ryuu](https://github.com/futagoza).<br>
