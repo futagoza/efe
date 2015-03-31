@@ -8,6 +8,7 @@ var PATH = require('path');
 var chokidar = require('chokidar');
 var glob = require('glob');
 var Walker = require("walker");
+var filesize = require("filesize");
 
 /**
  * `efe`'s' module.exports is a shallow clone of `fs` and `fs-extra`
@@ -187,3 +188,51 @@ fs.walkSync = function ( path, callback ) {
   };
   
 });
+
+/**
+ * Return total size of the given path.
+ * 
+ * @param {String} path
+ * @param {Object} options (optional)
+ * @param {Function} callback (optional)
+ * @return {Number|Null}
+ */
+
+fs.size = function ( path, options, callback ) {
+  if ( arguments.length === 2 ) {
+    if ( typeof options === 'function' ) {
+      callback = options;
+      options = null;
+    }
+  }
+  if ( typeof callback === 'function' ) {
+    var size = 0;
+    Walker(path)
+      .on('entry', function(entry, stat){
+        size += stat.size;
+      })
+      .on('error', function(er, entry, stat){
+        callback(er, size, entry, stat);
+      })
+      .on('end', function(){
+        if ( size && options ) {
+          size = filesize(size, options);
+        }
+        callback(null, size);
+      });
+  } else {
+    return fs.sizeSync(path, options);
+  }
+};
+
+fs.sizeSync = function ( path, options ) {
+  var size = 0;
+  if ( fs.isDirectory(path) ) {
+    fs.walkSync(path, function(path, stats){
+      size += stats.size;
+    });
+  } else {
+    size = FSE.lstatSync(path).size;
+  }
+  return options ? filesize(size, options) : size;
+};

@@ -56,13 +56,17 @@ fs.walk(path, callback);
 fs.walkSync(path, callback);
 
 // Check if the given path is of a spefic type
-fs.isFile(path[, callback])
-fs.isDirectory(path[, callback])
-fs.isBlockDevice(path[, callback])
-fs.isCharacterDevice(path[, callback])
-fs.isSymbolicLink(path[, callback])
-fs.isFIFO(path[, callback])
-fs.isSocket(path[, callback])
+fs.isFile(path, [callback])
+fs.isDirectory(path, [callback])
+fs.isBlockDevice(path, [callback])
+fs.isCharacterDevice(path, [callback])
+fs.isSymbolicLink(path, [callback])
+fs.isFIFO(path, [callback])
+fs.isSocket(path, [callback])
+
+// Return total size of the given path
+fs.size(path, [options], [callback])
+fs.sizeSync(path, [options])
 ```
 
 # dependencies

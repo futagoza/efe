@@ -25,6 +25,7 @@
     "fs-extra": "0.17.0",
     "chokidar": "1.0.0-rc4",
     "glob": "5.0.3",
-    "walker": "1.0.6"
+    "walker": "1.0.6",
+    "filesize": "3.1.2"
   }
 }
