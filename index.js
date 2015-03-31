@@ -35,9 +35,11 @@ fs.VERSION = require('./package.json').version;
 var normalize = PATH.normalize;
 
 fs.enableForwardSlashes = function ( ) {
-  fs.normalize = PATH.normalize = function ( ) {
-    return normalize.apply(PATH, arguments).replace('\\', '/');
-  };
+  if ( PATH.sep === '\\' ) {
+    fs.normalize = PATH.normalize = function ( ) {
+      return normalize.apply(PATH, arguments).replace('\\', '/');
+    };
+  }
   return fs;
 };
 
@@ -45,6 +47,8 @@ fs.disableForwardSlashes = function ( ) {
   fs.normalize = PATH.normalize = normalize;
   return fs;
 };
+
+fs.resetNormalize = fs.disableForwardSlashes;
 
 /**
  * Remove `deprecated` warning when using `fs.exists(Sync)`.
@@ -103,7 +107,7 @@ function modifyStatsObject ( stats, path ) {
   return stats;
 }
 
-["stat", "lstat"/*, "fstat"*/].forEach(function(method){
+["stat", "lstat", "fstat"].forEach(function(method){
   
   fs[method] = function ( path, callback ) {
     FSE[method](path, function(err, stats){

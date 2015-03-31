@@ -17,6 +17,7 @@ var efe = require('efe');
 // Ensure's forward slashs are used on Windows
 fs.enableForwardSlashes();
 fs.disableForwardSlashes();
+fs.resetNormalize();
 
 // Removed `deprecated` warning when using `fs.exists(Sync)`
 fs.exists(path, callback);
