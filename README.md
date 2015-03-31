@@ -54,6 +54,15 @@ fs.lstatSync(path);
 // Walk directory tree, firing `callback` on every item not a directory
 fs.walk(path, callback);
 fs.walkSync(path, callback);
+
+// Check if the given path is of a spefic type
+fs.isFile(path[, callback])
+fs.isDirectory(path[, callback])
+fs.isBlockDevice(path[, callback])
+fs.isCharacterDevice(path[, callback])
+fs.isSymbolicLink(path[, callback])
+fs.isFIFO(path[, callback])
+fs.isSocket(path[, callback])
 ```
 
 # dependencies

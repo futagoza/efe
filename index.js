@@ -154,3 +154,36 @@ fs.walkSync = function ( path, callback ) {
   else
     callback(path, stats);
 };
+
+/**
+ * Check if the given path is of a spefic type.
+ * 
+ * Passing a callback will turn these methods into Async's,
+ * but if there's no callback, these are just sync methods.
+ * 
+ * @param {String} path
+ * @param {Function} callback (optional)
+ * @return {Boolean|Null}
+ */
+
+[
+  
+  "isFile",
+  "isDirectory",
+  "isBlockDevice",
+  "isCharacterDevice",
+  "isSymbolicLink",
+  "isFIFO",
+  "isSocket"
+
+].forEach(function(method){
+  
+  fs[method] = function ( path, callback ) {
+    if ( arguments.length === 1 ) return FSE.lstatSync(path);
+    FSE.lstat(path, function(err, stats){
+      if ( err ) throw err;
+      callback(stats ? stats[method]() : false);
+    });
+  };
+  
+});
