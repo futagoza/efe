@@ -1,7 +1,7 @@
 An enhanced version of [fs-extra](https://github.com/jprichardson/node-fs-extra)<br>
 
 # note
-All properties from 'fs' and methods from 'fs-extra' are shallow cloned when this module is required for the first time, which means extending this modules exports will not affect either of those modules.
+All properties from [fs-extra](https://www.npmjs.com/package/fs-extra) are shallow cloned when this module is required for the first time, which means extending this module's exports will not affect the use of `fs-extra` from anywhere else.
 
 # install
   
@@ -58,12 +58,27 @@ fs.walkSync(path, callback);
 
 // Check if the given path is of a spefic type
 fs.isFile(path, [callback])
+fs.isFileSync(path)
 fs.isDirectory(path, [callback])
+fs.isDirectorySync(path)
 fs.isBlockDevice(path, [callback])
+fs.isBlockDeviceSync(path)
+fs.isBlock(path, [callback])
+fs.isBlockSync(path)
 fs.isCharacterDevice(path, [callback])
+fs.isCharacterDeviceSync(path)
+fs.isCharacter(path, [callback])
+fs.isCharacterSync(path)
 fs.isSymbolicLink(path, [callback])
+fs.isSymbolicLinkSync(path)
+fs.isSymbolic(path, [callback])
+fs.isSymbolicSync(path)
+fs.isLink(path, [callback])
+fs.isLinkSync(path)
 fs.isFIFO(path, [callback])
+fs.isFIFOSync(path)
 fs.isSocket(path, [callback])
+fs.isSocketSync(path)
 
 // Return total size of the given path
 fs.size(path, [options], [callback])
@@ -77,6 +92,12 @@ fs.sizeSync(path, [options])
   * glob: [https://github.com/isaacs/node-glob](https://github.com/isaacs/node-glob)
   * walker: [https://github.com/daaku/nodejs-walker](https://github.com/daaku/nodejs-walker)
   * filesize: [https://github.com/avoidwork/filesize.js](https://github.com/avoidwork/filesize.js)
+
+# efe links
+  
+  * npm release: [https://www.npmjs.com/package/efe](https://www.npmjs.com/package/efe)
+  * source: [https://github.com/futagoza/efe](https://github.com/futagoza/efe)
+  * issues: [https://github.com/futagoza/efe/issues](https://github.com/futagoza/efe/issues)
 
 # license
 Copyright (c) 2015 [Futago-za Ryuu](https://github.com/futagoza).<br>

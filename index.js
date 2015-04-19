@@ -2,8 +2,7 @@
  * Required modules.
  */
 
-var NFS = require('fs');
-var FSE = require('fs-extra');
+var FS = require('fs-extra');
 var PATH = require('path');
 var chokidar = require('chokidar');
 var glob = require('glob');
@@ -11,15 +10,12 @@ var Walker = require("walker");
 var filesize = require("filesize");
 
 /**
- * `efe`'s' module.exports is a shallow clone of `fs` and `fs-extra`
+ * `efe`'s' module.exports is a shallow clone of `fs-extra`
  */
 
 var fs = exports = module.exports = {};
-Object.keys(NFS).forEach(
-  function ( key ) { fs[key] = NFS[key]; }
-);
-Object.keys(FSE).forEach(
-  function ( key ) { fs[key] = FSE[key]; }
+Object.keys(FS).forEach(
+  function ( key ) { fs[key] = FS[key]; }
 );
 
 /**
@@ -57,7 +53,7 @@ fs.resetNormalize = fs.disableForwardSlashes;
 if ( fs.access && fs.accessSync ) {
   
   fs.exists = function ( path, callback ) {
-    return fs.access(path, fs.F_OK, function(err){
+    fs.access(path, fs.F_OK, function(err){
       if ( err ) throw err;
       callback(err ? null : true);
     });
@@ -91,8 +87,8 @@ fs.hasMagic = glob.hasMagic;
 fs.glob = glob;
 fs.globSync = glob.sync;
 fs.Glob = glob.Glob;
-fs.writeFile = FSE.outputFile;
-fs.writeFileSync = FSE.outputFileSync;
+fs.writeFile = FS.outputFile;
+fs.writeFileSync = FS.outputFileSync;
 fs.Walker = Walker;
 
 /**
@@ -110,13 +106,13 @@ function modifyStatsObject ( stats, path ) {
 ["stat", "lstat", "fstat"].forEach(function(method){
   
   fs[method] = function ( path, callback ) {
-    FSE[method](path, function(err, stats){
+    FS[method](path, function(err, stats){
       callback(err, stats ? modifyStatsObject(stats, path) : stats);
     });
   };
   
   fs[method + 'Sync'] = function ( path ) {
-    return modifyStatsObject(FSE[method + 'Sync'](path), path);
+    return modifyStatsObject(FS[method + 'Sync'](path), path);
   };
   
 });
@@ -184,14 +180,33 @@ fs.walkSync = function ( path, callback ) {
 ].forEach(function(method){
   
   fs[method] = function ( path, callback ) {
-    if ( arguments.length === 1 ) return FSE.lstatSync(path);
-    FSE.lstat(path, function(err, stats){
+    if ( arguments.length === 1 ) {
+      return FS.lstatSync(path)[method]();
+    }
+    FS.lstat(path, function(err, stats){
       if ( err ) throw err;
       callback(stats ? stats[method]() : false);
     });
   };
   
+  fs[method + 'Sync'] = function ( path ) {
+    return FS.lstatSync(path)[method]();
+  };
+  
 });
+
+/**
+ * Some alias's for path checking methods.
+ */
+
+fs.isBlock = fs.isBlockDevice;
+fs.isBlockSync = fs.isBlockDeviceSync;
+fs.isCharacter = fs.isCharacterDevice;
+fs.isCharacterSync = fs.isCharacterDeviceSync;
+fs.isSymbolic = fs.isSymbolicLink;
+fs.isSymbolicSync = fs.isSymbolicLinkSync;
+fs.isLink = fs.isSymbolicLink;
+fs.isLinkSync = fs.isSymbolicLinkSync;
 
 /**
  * Return total size of the given path.
@@ -236,7 +251,7 @@ fs.sizeSync = function ( path, options ) {
       size += stats.size;
     });
   } else {
-    size = FSE.lstatSync(path).size;
+    size = FS.lstatSync(path).size;
   }
   return options ? filesize(size, options) : size;
 };
