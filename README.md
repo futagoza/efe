@@ -12,10 +12,10 @@ npm install efe --save
 # api usage
   
 ```js
-var efe = require('efe');
+var fs = require('efe');
 
 // Ensure's forward slashs are used on Windows
-fs.enableForwardSlashes();
+fs.enableForwardSlashes(); // or fs()
 fs.disableForwardSlashes();
 fs.resetNormalize();
 

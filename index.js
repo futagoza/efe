@@ -10,10 +10,17 @@ var Walker = require("walker");
 var filesize = require("filesize");
 
 /**
- * `efe`'s' module.exports is a shallow clone of `fs-extra`
+ * Main `efe`, is just a way to call `efe.enableForwardSlashes`
  */
 
-var fs = exports = module.exports = {};
+var fs = exports = module.exports = function ( ) {
+  return fs.enableForwardSlashes();
+};
+
+/**
+ * Shallow clone of `fs-extra` to `efe`
+ */
+
 Object.keys(FS).forEach(
   function ( key ) { fs[key] = FS[key]; }
 );
@@ -29,11 +36,15 @@ fs.VERSION = require('./package.json').version;
  */
 
 var normalize = PATH.normalize;
+var resolve = PATH.resolve;
 
 fs.enableForwardSlashes = function ( ) {
   if ( PATH.sep === '\\' ) {
     fs.normalize = PATH.normalize = function ( ) {
       return normalize.apply(PATH, arguments).replace('\\', '/');
+    };
+    fs.resolve = PATH.resolve = function ( ) {
+      return resolve.apply(PATH, arguments).replace('\\', '/');
     };
   }
   return fs;
@@ -41,6 +52,7 @@ fs.enableForwardSlashes = function ( ) {
 
 fs.disableForwardSlashes = function ( ) {
   fs.normalize = PATH.normalize = normalize;
+  fs.resolve = PATH.resolve = resolve;
   return fs;
 };
 
@@ -69,9 +81,7 @@ if ( fs.access && fs.accessSync ) {
  * Attach methods from other modules to `efe`.
  */
 
-fs.normalize = PATH.normalize;
 fs.join = PATH.join;
-fs.resolve = PATH.resolve;
 fs.isAbsolute = PATH.isAbsolute;
 fs.relative = PATH.relative;
 fs.dirname = PATH.dirname;
