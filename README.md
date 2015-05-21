@@ -1,3 +1,6 @@
+[![Dependency Status](https://david-dm.org/futagoza/efe.svg)](https://david-dm.org/futagoza/efe)
+
+
 An enhanced version of [fs-extra](https://github.com/jprichardson/node-fs-extra)<br>
 
 # note
