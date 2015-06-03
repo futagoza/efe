@@ -43,7 +43,7 @@ fs.Watcher(options);
 fs.watch(paths, options);
 fs.hasMagic(pattern, [options]);
 fs.glob(pattern, [options], cb);
-fs.sync(pattern, [options]);
+fs.globSync(pattern, [options]);
 fs.Glob(pattern, [options], [cb]);
 fs.writeFile(filename, data[, options], callback);
 fs.writeFileSync(filename, data[, options]);
@@ -51,9 +51,11 @@ fs.Walker(root);
 
 // Updated the `stats` objects returned by methods using `fs.Stats`
 fs.stat(path, callback);
-fs.lstat(path, callback);
 fs.statSync(path);
+fs.lstat(path, callback);
 fs.lstatSync(path);
+fs.fstat(path, callback);
+fs.fstatSync(path);
 
 // Walk directory tree, firing `callback` on every item not a directory
 fs.walk(path, callback);
