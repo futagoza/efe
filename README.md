@@ -17,7 +17,7 @@ npm install efe --save
 ```js
 var fs = require('efe');
 
-// Ensure's forward slashs are used on Windows
+// Ensures forward slashes are used on Windows
 fs.enableForwardSlashes(); // or fs()
 fs.disableForwardSlashes();
 fs.resetNormalize();
@@ -61,7 +61,7 @@ fs.fstatSync(path);
 fs.walk(path, callback);
 fs.walkSync(path, callback);
 
-// Check if the given path is of a spefic type
+// Check if the given path is of a specific type
 fs.isFile(path, [callback])
 fs.isFileSync(path)
 fs.isDirectory(path, [callback])

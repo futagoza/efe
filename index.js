@@ -32,7 +32,7 @@ Object.keys(FS).forEach(
 fs.VERSION = require('./package.json').version;
 
 /**
- * Ensure's forward slashs are used on Windows.
+ * Ensures forward slashes are used on Windows.
  */
 
 var normalize = PATH.normalize;
@@ -128,7 +128,7 @@ function modifyStatsObject ( stats, path ) {
 });
 
 /**
- * Walk the directory tree, firing `callback` on every item thats not a directory.
+ * Walk the directory tree, firing `callback` on every item that's not a directory.
  * 
  * @param {String} path
  * @param {Function} callback
@@ -167,7 +167,7 @@ fs.walkSync = function ( path, callback ) {
 };
 
 /**
- * Check if the given path is of a spefic type.
+ * Check if the given path is of a specific type.
  * 
  * Passing a callback will turn these methods into Async's,
  * but if there's no callback, these are just sync methods.
@@ -206,7 +206,7 @@ fs.walkSync = function ( path, callback ) {
 });
 
 /**
- * Some alias's for path checking methods.
+ * Some aliases for path checking methods.
  */
 
 fs.isBlock = fs.isBlockDevice;
