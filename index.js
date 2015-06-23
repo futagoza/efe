@@ -81,6 +81,8 @@ if ( fs.access && fs.accessSync ) {
  * Attach methods from other modules to `efe`.
  */
 
+fs.normalize = PATH.normalize;
+fs.resolve = PATH.resolve;
 fs.join = PATH.join;
 fs.isAbsolute = PATH.isAbsolute;
 fs.relative = PATH.relative;
@@ -160,7 +162,7 @@ fs.walkSync = function ( path, callback ) {
   var stats = fs.lstatSync(path);
   if ( stats.isDirectory() )
     fs.readdirSync(path).forEach(function(item){
-      fs.walk(fs.join(path, item), callback);
+      fs.walkSync(fs.join(path, item), callback);
     });
   else
     callback(path, stats);
