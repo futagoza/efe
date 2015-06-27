@@ -23,8 +23,7 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "npm test",
-    "test": "node node_modules/mocha/bin/mocha",
-    "docs": "node node_modules/jsdoc/jsdoc.js -c jsdoc.json"
+    "test": "node node_modules/mocha/bin/mocha"
   },
   "dependencies": {
     "fs-extra": "0.20.1",
@@ -35,7 +34,6 @@
   },
   "devDependencies": {
     "mock-fs": "2.7.1",
-    "mocha": "2.2.5",
-    "jsdoc": "3.3.2"
+    "mocha": "2.2.5"
   }
 }

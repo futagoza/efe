@@ -10,10 +10,10 @@ var Walker = require("walker");
 var filesize = require("filesize");
 
 /**
- * Main `efe`, is just a way to call `efe.enableForwardSlashes`
+ * The default export is just a shorthand for `fs.enableForwardSlashes()`
  */
 
-var fs = exports = module.exports = function ( ) {
+var fs = module.exports = function ( ) {
   return fs.enableForwardSlashes();
 };
 
