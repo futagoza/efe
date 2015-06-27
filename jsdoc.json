@@ -1,0 +1,14 @@
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": ["index.js"]
+  },
+  "opts": {
+    "destination": "docs"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ]
+}
