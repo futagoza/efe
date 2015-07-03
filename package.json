@@ -22,8 +22,8 @@
   
   "main": "index.js",
   "scripts": {
-    "prepublish": "npm test",
-    "test": "node node_modules/mocha/bin/mocha"
+    "prepublish": "node test",
+    "test": "node test"
   },
   "dependencies": {
     "fs-extra": "0.20.1",
