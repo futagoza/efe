@@ -3,6 +3,8 @@
 [![NPM version](https://img.shields.io/npm/v/efe.svg?style=flat)](https://www.npmjs.com/package/efe)
 [![Dependency Status](https://david-dm.org/futagoza/efe.svg)](https://david-dm.org/futagoza/efe)
 [![devDependency Status](https://david-dm.org/futagoza/efe/dev-status.svg)](https://david-dm.org/futagoza/efe#info=devDependencies)
+[![travis-ci](https://secure.travis-ci.org/futagoza/efe.svg)](http://travis-ci.org/futagoza/efe)
+[![appveyor](https://img.shields.io/appveyor/ci/futagoza/efe/master.svg?label=appveyor)](https://ci.appveyor.com/project/futagoza/efe/branch/master)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://github.com/futagoza/efe/blob/master/LICENSE)
 
 An enhanced version of [fs-extra](https://github.com/jprichardson/node-fs-extra)<br>
