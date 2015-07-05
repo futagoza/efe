@@ -1,7 +1,7 @@
 describe('fs-integration:', function(){
 
   it('should use native fs methods', function(){
-    var filename = path.join(__fixtures__, 'temp.txt');
+    var filename = path.join(__fixtures__, 'output', 'temp.txt');
     efe.writeFileSync(filename, 'hello');
     assert.equal(efe.readFileSync(filename, 'utf8'), 'hello');
   });

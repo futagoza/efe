@@ -1,5 +1,6 @@
 var Mocha = require('mocha');
 var walk = require('walker');
+var path = require('path');
 
 global.mocha = new Mocha({
   ui: 'bdd',
@@ -7,7 +8,7 @@ global.mocha = new Mocha({
   timeout: 25000
 });
 
-walk(__dirname)
+walk(path.join(__dirname, 'spec'))
   .on('entry', function(entry, stat){
     if ( stat.isFile() ) {
       if ( entry.slice(-8) === '.test.js' ) mocha.addFile(entry)
