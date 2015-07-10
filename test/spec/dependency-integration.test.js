@@ -1,4 +1,4 @@
-describe('fs-integration:', function(){
+describe('fs integration:', function(){
 
   it('should use native fs methods', function(){
     var filename = path.join(__fixtures__, 'output', 'temp.txt');
